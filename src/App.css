@@ -1,0 +1,25 @@
+.theme-dark {
+  /* Тёмная тема */
+  background-color: #343a40;
+  color: white;
+}
+
+.country-flag {
+  max-height: 107px;
+  width: auto;
+  object-fit: contain;
+}
+
+.country-flag-detail {
+  max-width: 800px;
+  width: auto;
+  object-fit: contain;
+}
+
+.country-card-detail {
+  max-width: 800px;
+}
+
+.main-container {
+  min-height: calc(100vh - 56px);
+}
