@@ -1,17 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Button, Card, Container } from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
 import { useGeneralStore } from '../store/store';
 
 export default function CountryDetails() {
+    // получение названя страны из поискового запроса
     const { name } = useParams();
-    const { country, fetchCountryDetails, error, clearError } = useGeneralStore();
+    const { country, fetchCountryDetails, error, clearError, clearCountry } = useGeneralStore();
 
     useEffect(() => {
+        // очистка прошлых ошибки и выбранной страны
+        clearError();
+        clearCountry();
+        // получение данных о стране
         fetchCountryDetails(name);
-        return () => clearError();
-    }, [fetchCountryDetails, name]);
+    }, []);
 
+    // вывод ошибки
     if (error) {
         return (
         <Container className="p-4">
@@ -23,6 +28,7 @@ export default function CountryDetails() {
         );
     }
 
+    // уведомление о загрузке данных
     if (!country) {
         return (
         <Container className="p-4">
@@ -32,7 +38,7 @@ export default function CountryDetails() {
     }
 
     return (
-        <Container className="p-4 main-container">
+        <Container className="p-4">
             <Card className="bg-secondary text-white country-card-detail">
                 <Card.Img variant="top"  src={country.flags.svg} className='country-flag-detail' />
                 <Card.Body>

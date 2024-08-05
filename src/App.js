@@ -6,13 +6,13 @@ import { useGeneralStore } from './store/store';
 
 export default function App() {
   const navigate = useNavigate();
-  const { fetchCountries, clearError } = useGeneralStore();
+  const { fetchCountries } = useGeneralStore();
 
   useEffect(() => {
       // получение данных стран 
       fetchCountries();
+      // переадресация на список стран
       navigate(`/all`);
-      return () => clearError();
   }, []);
 
   return (
@@ -21,7 +21,7 @@ export default function App() {
         <Header/>
       </header>
 
-      <body className='theme-dark'>
+      <body className='theme-dark main-container'>
         <Outlet/>
       </body>
     </>

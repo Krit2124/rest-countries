@@ -5,11 +5,16 @@ import CountryCard from './countryCard';
 import { useGeneralStore } from '../store/store';
 
 export default function CountriesList() {
-  const { countries, error } = useGeneralStore();
+  const { countries, error, clearError } = useGeneralStore();
+  // поисковый запрос
   const [searchQuery, setSearchQuery] = useState('');
+  // отфильтрованный массив стран
   const [filteredCountries, setFilteredCountries] = useState([]);
 
   useEffect(() => {
+    // очистка прошлой ошибки
+    clearError();
+    // фильтрация стран
     setFilteredCountries(
       countries.filter(country =>
         country.name.common.toLowerCase().includes(searchQuery.toLowerCase())
@@ -17,6 +22,7 @@ export default function CountriesList() {
     );
   }, [countries, searchQuery]);
 
+  // вывод ошибки
   if (error) {
     return (
       <Container className="p-4">
@@ -26,7 +32,7 @@ export default function CountriesList() {
   }
 
   return (
-    <Container className="p-4 main-container">
+    <Container className="p-4">
       <Form className="mb-4">
         <Form.Control
           type="text"
@@ -38,7 +44,7 @@ export default function CountriesList() {
 
       <Row>
         {filteredCountries.map((country) => (
-          <Col key={country.cca3} xs={12} md={4} lg={3}>
+          <Col key={country.name.common} xs={12} md={4} lg={3}>
             <Link to={`/country/${country.name.common}`} style={{ textDecoration: 'none' }}>
               <CountryCard country={country} />
             </Link>
