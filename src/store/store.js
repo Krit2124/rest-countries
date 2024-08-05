@@ -10,26 +10,28 @@ export const useGeneralStore = create((set) => ({
     // получение всех стран
     fetchCountries: async () => {
         try {
-        const response = await fetch('https://restcountries.com/v3.1/all?fields=name,flags');
-        const data = await response.json();
-        set({ countries: data });
+            const response = await fetch('https://restcountries.com/v3.1/all?fields=name,flags');
+            const data = await response.json();
+            set({ countries: data });
         } catch (error) {
-        set({ error: 'Error fetching countries' });
+            set({ error: 'Error fetching countries' });
         }
     },
     // получение детальной информации о стране
     fetchCountryDetails: async (name) => {
         try {
-        const response = await fetch(`https://restcountries.com/v3.1/name/${name}`);
-        if (!response.ok) {
-            throw new Error('Country not found');
-        }
-        const data = await response.json();
-        set({ country: data[0] });
+            const response = await fetch(`https://restcountries.com/v3.1/name/${name}`);
+            if (!response.ok) {
+                throw new Error('Country not found');
+            }
+            const data = await response.json();
+            set({ country: data[0] });
         } catch (error) {
-        set({ error: 'Error fetching country details' });
+            set({ error: 'Error fetching country details' });
         }
     },
-    // удаление ошибки
+    // очистка ошибки
     clearError: () => set({ error: null }),
+    // очистка выбранной страны
+    clearCountry: () => set({ country: null }),
 }));
