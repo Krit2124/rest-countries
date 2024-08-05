@@ -5,9 +5,7 @@ import CountryCard from './countryCard';
 import { useGeneralStore } from '../store/store';
 
 export default function CountriesList() {
-  const { countries, error, clearError, clearError, searchQuery } = useGeneralStore();
-  // поисковый запрос
-  // отфильтрованный массив стран
+  const { countries, error, clearError, searchQuery } = useGeneralStore();
   // отфильтрованный массив стран
   const [filteredCountries, setFilteredCountries] = useState([]);
 
