@@ -3,6 +3,9 @@ import { create } from 'zustand';
 export const useGeneralStore = create((set) => ({
     // массив стран
     countries: [],
+    // текст запроса
+    searchQuery: '',
+    setSearchQuery: (query) => set({ searchQuery: query }),
     // текущая страна
     country: null,
     // ошибка при запросе

@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Container, Row, Form } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import CountryCard from './countryCard';
 import { useGeneralStore } from '../store/store';
 
 export default function CountriesList() {
-  const { countries, error, clearError } = useGeneralStore();
-  // поисковый запрос
-  const [searchQuery, setSearchQuery] = useState('');
+  const { countries, error, clearError, searchQuery } = useGeneralStore();
   // отфильтрованный массив стран
   const [filteredCountries, setFilteredCountries] = useState([]);
 
@@ -33,15 +31,6 @@ export default function CountriesList() {
 
   return (
     <Container className="p-4">
-      <Form className="mb-4">
-        <Form.Control
-          type="text"
-          placeholder="Search by country name"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-      </Form>
-
       <Row>
         {filteredCountries.map((country) => (
           <Col key={country.name.common} xs={12} md={4} lg={3}>
